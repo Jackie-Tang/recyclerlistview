@@ -19,7 +19,7 @@
  * TODO: Solve //TSI
  */
 //@ts-ignore
-import {debounce} from "lodash-es";
+import {debounce} from "lodash";
 import * as PropTypes from "prop-types";
 import * as React from "react";
 //@ts-ignore
