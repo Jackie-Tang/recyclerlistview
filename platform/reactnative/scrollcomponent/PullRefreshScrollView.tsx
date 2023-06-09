@@ -12,12 +12,12 @@ import {
   View,
   Platform,
   ActivityIndicator,
-  AsyncStorage,
   ImageBackground,
 } from 'react-native';
 import BaseScrollComponent, {
   ScrollComponentProps,
 } from '../../../core/scrollcomponent/BaseScrollComponent';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BaseItemAnimator } from '../../../core/ItemAnimator';
 import TSCast from '../../../utils/TSCast';
 import { Dimensions, Text, StyleSheet } from 'react-native';
@@ -155,7 +155,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       >
         <View style={{ flexDirection: this.props.isHorizontal ? 'row' : 'column' }}>
           {this.props.onRefresh ? this.renderIndicatorContent() : null}
-          {this.props.renderHeader}
           <View
             style={{
               height:
@@ -167,9 +166,10 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
               width: this.props.contentWidth,
             }}
           >
+            {this.props.renderHeader && this.props.renderHeader()}
             {this.props.children}
           </View>
-          {this.props.renderFooter}
+          {this.props.renderFooter && this.props.renderFooter()}
           {this.props.onEndReached ? this.renderIndicatorContentBottom() : null}
         </View>
       </Scroller>
