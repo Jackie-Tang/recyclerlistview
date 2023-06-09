@@ -127,7 +127,7 @@ export default class RecyclerListView extends React.Component {
             }
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         if (this.props.contextProvider) {
             const uniqueKey = this.props.contextProvider.getUniqueKey();
             if (uniqueKey) {

@@ -16,7 +16,7 @@ export default class BaseViewRenderer extends React.Component {
     componentDidMount() {
         this.props.itemAnimator.animateDidMount(this.props.x, this.props.y, this.getRef(), this.props.index);
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.itemAnimator.animateWillMount(this.props.x, this.props.y, this.props.index);
     }
     componentWillUnmount() {
