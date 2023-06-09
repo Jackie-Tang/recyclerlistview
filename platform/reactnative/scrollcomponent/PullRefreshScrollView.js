@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Platform, ActivityIndicator, AsyncStorage } from "react-native";
 import BaseScrollComponent from "../../../core/scrollcomponent/BaseScrollComponent";
+import { BaseItemAnimator } from "../../../core/ItemAnimator";
 import TSCast from "../../../utils/TSCast";
 import { Dimensions, Text, StyleSheet } from "react-native";
 import { Animated } from "react-native";
@@ -35,7 +36,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             this._scrollViewRef.scrollTo({ x, y, animated: isAnimated });
         }
     }
-    componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps() {
     }
     componentDidMount() {
         if (Platform.OS === 'android' &&
@@ -288,7 +289,8 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         Animated.timing(this.state.prArrowDeg, {
             toValue: 1,
             duration: 100,
-            easing: Easing.inOut(Easing.quad)
+            easing: Easing.inOut(Easing.quad),
+            useNativeDriver: BaseItemAnimator.USE_NATIVE_DRIVER,
         }).start();
     }
     downState() {
@@ -299,7 +301,8 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         Animated.timing(this.state.prArrowDeg, {
             toValue: 0,
             duration: 100,
-            easing: Easing.inOut(Easing.quad)
+            easing: Easing.inOut(Easing.quad),
+            useNativeDriver: BaseItemAnimator.USE_NATIVE_DRIVER,
         }).start();
     }
     _onLayout(event) {

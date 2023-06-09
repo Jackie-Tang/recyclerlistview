@@ -47,7 +47,7 @@ export default abstract class BaseViewRenderer<T> extends React.Component<ViewRe
     public componentDidMount(): void {
         this.props.itemAnimator.animateDidMount(this.props.x, this.props.y, this.getRef() as object, this.props.index);
     }
-    public componentWillMount(): void {
+    public UNSAFE_componentWillMount(): void {
         this.props.itemAnimator.animateWillMount(this.props.x, this.props.y, this.props.index);
     }
     public componentWillUnmount(): void {

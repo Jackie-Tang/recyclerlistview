@@ -200,7 +200,7 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
         };
     }
 
-    public componentWillReceiveProps(newProps: RecyclerListViewProps): void {
+    public UNSAFE_componentWillReceiveProps(newProps: RecyclerListViewProps): void {
         this._assertDependencyPresence(newProps);
         this._checkAndChangeLayouts(newProps);
         if (!this.props.onVisibleIndexesChanged) {

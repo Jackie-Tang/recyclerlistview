@@ -21,6 +21,7 @@ import {
 import BaseScrollComponent, {
   ScrollComponentProps,
 } from '../../../core/scrollcomponent/BaseScrollComponent';
+import { BaseItemAnimator } from '../../../core/ItemAnimator'
 import TSCast from '../../../utils/TSCast';
 import { Dimensions, Text, StyleSheet } from 'react-native';
 import RecyclerListView from '../../../core/RecyclerListView';
@@ -81,7 +82,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
     }
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     // if (this.flag !== this.props.flag) {
     //     if (Platform.OS === 'android') {
     //         this.setState({
@@ -477,6 +478,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       toValue: 1,
       duration: 100,
       easing: Easing.inOut(Easing.quad),
+      useNativeDriver: BaseItemAnimator.USE_NATIVE_DRIVER,
     }).start();
   }
 
@@ -490,6 +492,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       toValue: 0,
       duration: 100,
       easing: Easing.inOut(Easing.quad),
+      useNativeDriver: BaseItemAnimator.USE_NATIVE_DRIVER,
     }).start();
   }
 
