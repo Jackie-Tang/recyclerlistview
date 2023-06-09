@@ -52,7 +52,8 @@
     "gulp": "^4.0.0",
     "gulp-typescript": "^5.0.1",
     "husky": "^8.0.3",
-    "pinst": "^3.0.0"
+    "pinst": "^3.0.0",
+    "prettier": "^2.8.8"
   },
   "homepage": "https://github.com/bozaigao/react-native-refresh-loadmore-recyclerlistview",
   "keywords": [
@@ -88,7 +89,8 @@
     "_postinstall": "husky install",
     "prepublish": "pinst --disable",
     "postpublish": "pinst --enable",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\""
   },
   "types": "dist/reactnative/index.d.ts",
   "version": "1.4.27"

@@ -13,29 +13,30 @@
  */
 
 export default class LayoutProvider {
+  private _getLayoutTypeForIndex: (index: number) => string | number;
+  private _setLayoutForType: (type: string | number, dim: Dimension, index: number) => void;
 
-    private _getLayoutTypeForIndex: (index: number) => string | number;
-    private _setLayoutForType: (type: string | number, dim: Dimension, index: number) => void;
+  constructor(
+    getLayoutTypeForIndex: (index: number) => string | number,
+    setLayoutForType: (type: string | number, dim: Dimension, index: number) => void,
+  ) {
+    this._getLayoutTypeForIndex = getLayoutTypeForIndex;
+    this._setLayoutForType = setLayoutForType;
+  }
 
-    constructor(getLayoutTypeForIndex: (index: number) => string | number,
-                setLayoutForType: (type: string | number, dim: Dimension, index: number) => void) {
-        this._getLayoutTypeForIndex = getLayoutTypeForIndex;
-        this._setLayoutForType = setLayoutForType;
-    }
+  //Provide a type for index, something which identifies the template of view about to load
+  public getLayoutTypeForIndex(index: number): string | number {
+    return this._getLayoutTypeForIndex(index);
+  }
 
-    //Provide a type for index, something which identifies the template of view about to load
-    public getLayoutTypeForIndex(index: number): string | number {
-        return this._getLayoutTypeForIndex(index);
-    }
-
-    //Given a type and dimension set the dimension values on given dimension object
-    //You can also get index here if you add an extra argument but we don't recommend using it.
-    public setLayoutForType(type: string | number, dimension: Dimension, index: number): void {
-        return this._setLayoutForType(type, dimension, index);
-    }
+  //Given a type and dimension set the dimension values on given dimension object
+  //You can also get index here if you add an extra argument but we don't recommend using it.
+  public setLayoutForType(type: string | number, dimension: Dimension, index: number): void {
+    return this._setLayoutForType(type, dimension, index);
+  }
 }
 
 export interface Dimension {
-    height: number;
-    width: number;
+  height: number;
+  width: number;
 }

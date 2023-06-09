@@ -1,8 +1,5 @@
 /**
  * @filename ScrollComponent.tsx
- * @author 何晏波
- * @QQ 1054539528
- * @date 2018/10/11
  * @Description: 截至目前为止我所见过的和使用过的最流畅的rn同时完美适配Android和iOS的下拉刷新上拉加载组件
  * 结合recyclerlistview的高性能内存回收利用机制简直是绝配
  */
@@ -21,7 +18,7 @@ import {
 import BaseScrollComponent, {
   ScrollComponentProps,
 } from '../../../core/scrollcomponent/BaseScrollComponent';
-import { BaseItemAnimator } from '../../../core/ItemAnimator'
+import { BaseItemAnimator } from '../../../core/ItemAnimator';
 import TSCast from '../../../utils/TSCast';
 import { Dimensions, Text, StyleSheet } from 'react-native';
 import RecyclerListView from '../../../core/RecyclerListView';
@@ -39,8 +36,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
   private _height: number;
   private _width: number;
   private _isSizeChangedCalledOnce: boolean;
-  private _dummyOnLayout: (event: LayoutChangeEvent) => void =
-    TSCast.cast(null);
+  private _dummyOnLayout: (event: LayoutChangeEvent) => void = TSCast.cast(null);
   private _scrollViewRef: ScrollView | null = null;
   public static propTypes = {};
   private transform;
@@ -121,14 +117,12 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
   }
 
   public render(): JSX.Element {
-    const Scroller: any = TSCast.cast<ScrollView>(
-      this.props.externalScrollView
-    ); //TSI
+    const Scroller: any = TSCast.cast<ScrollView>(this.props.externalScrollView); //TSI
 
     return (
       <Scroller
         ref={(scrollView: any) => {
-      		this._scrollViewRef = scrollView as ScrollView | null;
+          this._scrollViewRef = scrollView as ScrollView | null;
           return this._scrollViewRef;
         }}
         onMomentumScrollEnd={(e) => {
@@ -159,17 +153,15 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             : this._dummyOnLayout
         }
       >
-        <View
-          style={{ flexDirection: this.props.isHorizontal ? 'row' : 'column' }}
-        >
+        <View style={{ flexDirection: this.props.isHorizontal ? 'row' : 'column' }}>
           {this.props.onRefresh ? this.renderIndicatorContent() : null}
+          {this.props.renderHeader}
           <View
             style={{
               height:
                 Platform.OS === 'ios'
                   ? this.props.contentHeight
-                  : Dimensions.get('window').height - this.props.contentHeight <
-                    0
+                  : Dimensions.get('window').height - this.props.contentHeight < 0
                   ? this.props.contentHeight
                   : Dimensions.get('window').height,
               width: this.props.contentWidth,
@@ -282,23 +274,14 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       if (this.state.prLoading) {
         //@ts-ignore
         jsxarr.push(
-          <ImageBackground
-            style={indicatorStyle}
-            source={{ uri: this.props.indicatorImg.url }}
-          />
+          <ImageBackground style={indicatorStyle} source={{ uri: this.props.indicatorImg.url }} />,
         );
       } else {
         jsxarr.push(null);
       }
     } else if (this.state.prLoading) {
       //@ts-ignore
-      jsxarr.push(
-        <ActivityIndicator
-          style={indicatorStyle}
-          animating={true}
-          color={'#488eff'}
-        />
-      );
+      jsxarr.push(<ActivityIndicator style={indicatorStyle} animating={true} color={'#488eff'} />);
     } else {
       jsxarr.push(null);
     }
@@ -314,7 +297,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             style={arrowStyle}
             resizeMode={'contain'}
             source={{ uri: this.props.indicatorArrowImg.url }}
-          />
+          />,
         );
       } else {
         jsxarr.push(null);
@@ -325,7 +308,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
           style={arrowStyle}
           resizeMode={'contain'}
           source={{ uri: this.base64Icon }}
-        />
+        />,
       );
     } else {
       jsxarr.push(null);
@@ -339,9 +322,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             return <View key={index}>{item}</View>;
           })}
         </View>
-        <Text style={styles.prText}>
-          上次更新时间：{this.state.prTimeDisplay}
-        </Text>
+        <Text style={styles.prText}>上次更新时间：{this.state.prTimeDisplay}</Text>
       </View>
     );
   }
@@ -373,9 +354,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
   }
 
   /**
-   * @author 何晏波
-   * @QQ 1054539528
-   * @date 2018/9/29
    * @function: 刷新结束
    */
   onRefreshEnd() {
@@ -414,7 +392,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
     jsx.push(
       <Text key={2} style={{ color: '#979aa0' }}>
         {this.state.loadTitle}
-      </Text>
+      </Text>,
     );
 
     return jsx;
@@ -425,7 +403,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       this.props.onScroll(
         event.nativeEvent.contentOffset.x,
         event.nativeEvent.contentOffset.y,
-        event
+        event,
       );
     }
     let target = event.nativeEvent;
@@ -462,7 +440,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       this.props.onScroll(
         event.nativeEvent.contentOffset.x,
         event.nativeEvent.contentOffset.y,
-        event
+        event,
       );
     }
   }
@@ -527,18 +505,13 @@ const dateFormat = function (dateTime, fmt) {
   };
 
   if (/(y+)/.test(tmp)) {
-    tmp = tmp.replace(
-      RegExp.$1,
-      String(date.getFullYear()).substr(4 - RegExp.$1.length)
-    );
+    tmp = tmp.replace(RegExp.$1, String(date.getFullYear()).substr(4 - RegExp.$1.length));
   }
   for (let k in o) {
     if (new RegExp('(' + k + ')').test(tmp)) {
       tmp = tmp.replace(
         RegExp.$1,
-        RegExp.$1.length === 1
-          ? o[k]
-          : ('00' + o[k]).substr(String(o[k]).length)
+        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(String(o[k]).length),
       );
     }
   }

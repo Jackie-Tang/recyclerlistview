@@ -6,15 +6,15 @@
  * Use this interface and implement the given methods to preserve context.
  */
 export default abstract class ContextProvider {
-    //Should be of string type, anything which is unique in my_global scope of your application
-    public abstract getUniqueKey(): string;
+  //Should be of string type, anything which is unique in my_global scope of your application
+  public abstract getUniqueKey(): string;
 
-    //Let recycler view save a value, you can use apis like session storage/async storage here
-    public abstract save(key: string, value: string | number): void;
+  //Let recycler view save a value, you can use apis like session storage/async storage here
+  public abstract save(key: string, value: string | number): void;
 
-    //Get value for a key
-    public abstract get(key: string): string | number;
+  //Get value for a key
+  public abstract get(key: string): string | number;
 
-    //Remove key value pair
-    public abstract remove(key: string): void;
+  //Remove key value pair
+  public abstract remove(key: string): void;
 }
