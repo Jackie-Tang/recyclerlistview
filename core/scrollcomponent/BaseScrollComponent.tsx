@@ -36,6 +36,8 @@ export interface ScrollComponentProps {
     style: any;
     url: string;
   };
+  enableLoadMore?: boolean;
+  enablerefresh?: boolean;
 }
 
 interface ScrollComponentState {

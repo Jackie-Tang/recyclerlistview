@@ -122,7 +122,11 @@ export interface RecyclerListViewProps {
   scrollViewProps?: object;
   onRefresh?: any;
   onLoadMore?: any;
-  useLoadMore?: boolean;
+  enableLoadMore?: boolean;
+  enablerefresh?: boolean;
+  endText?: string;
+  endingText?: string;
+  noDataText?: string;
 }
 
 export interface RecyclerListViewState {
@@ -174,9 +178,9 @@ export default class RecyclerListView extends React.Component<
       refreshedText: '释放立即刷新',
       refreshingText: '正在刷新数据中..',
       refreshText: '下拉可以刷新',
-      endText: '',
-      noDataText: '',
-      endingText: '',
+      endText: '没有更多了～',
+      noDataText: '暂无数据',
+      endingText: '加载中...',
       indicatorArrowImg: {
         style: [],
         url: '',
@@ -187,7 +191,8 @@ export default class RecyclerListView extends React.Component<
       },
       refreshType: 'normal',
       onRefresh: props.onRefresh,
-      useLoadMore: props.useLoadMore,
+      enableLoadMore: false,
+      enablerefresh: false,
       stickyHeaderIndices: null,
       onSizeChanged: null,
       canChangeSize: false,

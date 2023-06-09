@@ -54,7 +54,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
       loadTitle: args.endingText,
       prLoading: false,
       prArrowDeg: new Animated.Value(0),
-      prTimeDisplay: '暂无更新',
+      prTimeDisplay: '暂无',
       beginScroll: null,
       prState: 0,
     };
@@ -98,7 +98,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
   }
 
   componentDidMount() {
-    if (Platform.OS === 'android' && this.props.onRefresh) {
+    if (Platform.OS === 'android' && this.props.enablerefresh) {
       this.setState({
         prTitle: this.props.refreshingText,
         prLoading: true,
@@ -139,7 +139,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             }
           }
         }}
-        bounces={this.props.onRefresh ? true : false}
+        bounces={this.props.enablerefresh}
         onScrollEndDrag={(e) => this.onScrollEndDrag(e)}
         onScrollBeginDrag={() => this.onScrollBeginDrag()}
         removeClippedSubviews={false}
@@ -154,7 +154,8 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         }
       >
         <View style={{ flexDirection: this.props.isHorizontal ? 'row' : 'column' }}>
-          {this.props.onRefresh ? this.renderIndicatorContent() : null}
+          {this.props.enablerefresh ? this.renderIndicatorContent() : null}
+          {this.props.renderHeader && this.props.renderHeader()}
           <View
             style={{
               height:
@@ -166,11 +167,10 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
               width: this.props.contentWidth,
             }}
           >
-            {this.props.renderHeader && this.props.renderHeader()}
             {this.props.children}
           </View>
           {this.props.renderFooter && this.props.renderFooter()}
-          {this.props.onEndReached ? this.renderIndicatorContentBottom() : null}
+          {this.props?.enableLoadMore ? this.renderIndicatorContentBottom() : null}
         </View>
       </Scroller>
     );
